@@ -30,4 +30,7 @@ color: Color(0xff606060),
 * Si tienes problemas de internet 
 https://stackoverflow.com/questions/42736038/android-emulator-not-able-to-access-the-internet
 
+* Imagenes?
+https://docs.flutter.dev/ui/assets/assets-and-images
+
 # doctor_app
