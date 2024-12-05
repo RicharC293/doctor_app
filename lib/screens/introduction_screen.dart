@@ -33,16 +33,41 @@ class IntroductionScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                      color: Color(0xff62C6FF),
-                      blurRadius: 10,
+                      /// Opacidad -> .withOpacity
+                      color: const Color(0xff62C6FF).withOpacity(0.17),
+                      blurRadius: 100,
+                      spreadRadius: 10,
                     ),
                   ],
                 ),
                 child: Image.asset("assets/images/doctor.png"),
               ),
-              FilledButton(
-                onPressed: () {},
-                child: Text("Let’s start"),
+              const Divider(
+                height: 0,
+              ),
+              SizedBox(
+                // double.infinity -> 100% | padre |
+                width: double.infinity,
+                height: 60,
+                child: FilledButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                    backgroundColor:
+                        const WidgetStatePropertyAll(Color(0xffFEA725)),
+                    shape: WidgetStatePropertyAll(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                  child: const Text(
+                    "Let's start",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
