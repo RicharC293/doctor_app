@@ -105,6 +105,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: "Diagnostic",
                 onTap: (){},
               ),
+              MedicalCard(
+                color: const Color(0xff7166F9),
+                srcIcon: "assets/svg/diagnostic.svg",
+                title: "Diagnostic",
+                onTap: (){},
+              ),
+              MedicalCard(
+                color: const Color(0xff7166F9),
+                srcIcon: "assets/svg/diagnostic.svg",
+                title: "Diagnostic",
+                onTap: (){},
+              ),
+              MedicalCard(
+                color: const Color(0xff7166F9),
+                srcIcon: "assets/svg/diagnostic.svg",
+                title: "Diagnostic",
+                onTap: (){},
+              ),
             ],
           ),
 
