@@ -1,4 +1,5 @@
 import 'package:doctor_app_template/screens/introduction_screen.dart';
+import 'package:doctor_app_template/utils/routes.dart';
 import 'package:doctor_app_template/utils/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -10,10 +11,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
+      title: 'App Doctor',
+
+      /// quitar el banner de debug
+      debugShowCheckedModeBanner: false,
 
       /// En sus casas aplicar la estrategia de rutas por nombre
-      home: IntroductionScreen(),
+      // home: IntroductionScreen(),
+
+      routes: routes,
+      initialRoute: IntroductionScreen.routeName,
 
       /// ThemeData
       theme: theme,

@@ -1,7 +1,10 @@
+import 'package:doctor_app_template/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class IntroductionScreen extends StatelessWidget {
   const IntroductionScreen({super.key});
+
+  static const routeName = "/introduction";
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +57,7 @@ class IntroductionScreen extends StatelessWidget {
                     children: [
                       Image.asset(
                         "assets/images/doctor.png",
+
                         /// Pruebas -> adaptar el tamaño de la imagen
                         // width: MediaQuery.of(context).size.width > 320
                         //     ? 600
@@ -74,7 +78,36 @@ class IntroductionScreen extends StatelessWidget {
                 width: double.infinity,
                 height: 60,
                 child: FilledButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // Navigator.pushNamed(context, HomeScreen.routeName);
+
+                    /// Reemplazar la pantalla
+                    /// pushReplacementNamed -> push otra pantalla
+                    /// Reemplazar la pantalla de origen por el destino
+                    Navigator.pushReplacementNamed(
+                        context, HomeScreen.routeName);
+
+                    /// No solo 1 pantalla
+                    /// IntroductionScreen    /// HomeScreen
+                    /// LoginScreen           
+                    /// ForgotPasswordScreen
+                    /// CodeVerificationScreen
+                  
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      HomeScreen.routeName,
+                      (route) => route.isCurrent,
+                    );
+
+                    ///  route.isActive -> si la ruta está activa
+                    ///  route.isCurrent -> si la ruta es la actual
+                    /// route.isFirst -> si la ruta es la primera
+                    
+
+                    /// LoginScreen -> context
+                    /// context -> ModalRecuperarContrasena 
+          
+                  },
                   style: ButtonStyle(
                     backgroundColor:
                         const WidgetStatePropertyAll(Color(0xffFEA725)),
@@ -93,7 +126,6 @@ class IntroductionScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
             ],
           ),
         ),
