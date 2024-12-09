@@ -1,6 +1,6 @@
+import 'package:doctor_app_template/widgets/doctor_card.dart';
 import 'package:doctor_app_template/widgets/medical_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -27,14 +27,15 @@ class _HomeScreenState extends State<HomeScreen> {
             // _scaffoldKey.currentState?.openEndDrawer();
           },
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: CircleAvatar(
-              backgroundColor: Colors.red,
-              backgroundImage: AssetImage("assets/images/avatar.png"),
-            ),
-          ),
+        actions: [
+          // const CircleAvatar(
+          //   backgroundColor: Colors.red,
+          //   backgroundImage: AssetImage("assets/images/avatar.png"),
+          // ),
+
+          /// light_mode -> Icono de sol
+          /// dark_mode -> Icono de luna
+          IconButton(onPressed: () {}, icon: const Icon(Icons.light_mode)),
         ],
       ),
       drawer: const Drawer(),
@@ -103,25 +104,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: const Color(0xff7166F9),
                 srcIcon: "assets/svg/diagnostic.svg",
                 title: "Diagnostic",
-                onTap: (){},
+                onTap: () {},
               ),
               MedicalCard(
-                color: const Color(0xff7166F9),
-                srcIcon: "assets/svg/diagnostic.svg",
-                title: "Diagnostic",
-                onTap: (){},
+                color: const Color(0xffFF7854),
+                srcIcon: "assets/svg/dental.svg",
+                title: "Dental",
+                onTap: () {},
               ),
               MedicalCard(
-                color: const Color(0xff7166F9),
-                srcIcon: "assets/svg/diagnostic.svg",
-                title: "Diagnostic",
-                onTap: (){},
+                color: const Color(0xffFEA725),
+                srcIcon: "assets/svg/surgeon.svg",
+                title: "Surgeon",
+                onTap: () {},
               ),
               MedicalCard(
-                color: const Color(0xff7166F9),
-                srcIcon: "assets/svg/diagnostic.svg",
-                title: "Diagnostic",
-                onTap: (){},
+                color: const Color(0xff68EEBE),
+                srcIcon: "assets/svg/medicines.svg",
+                title: "Medicines",
+                onTap: () {},
               ),
             ],
           ),
@@ -136,6 +137,47 @@ class _HomeScreenState extends State<HomeScreen> {
           //     Text("1"),
           //   ],
           // )
+
+          /// Lista de doctores
+          const SizedBox(height: 16),
+          const Text(
+            "Top Doctors",
+            style: TextStyle(
+              color: Color(0xff25282B),
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: 16),
+          const DoctorCard(
+            image: "assets/images/doctor_card_1.png",
+            name: "Dr. Stella Kane",
+            speciality: "Dental",
+            medicalCenter: "Columbia Asia Hospital",
+            rating: 5,
+          ),
+          const SizedBox(height: 12),
+          const DoctorCard(
+              image: "assets/images/doctor_card_2.png",
+              name: "Dr. Stella Kane",
+              speciality: "Dental",
+              medicalCenter: "Columbia Asia Hospital",
+              rating: 2),
+          const SizedBox(height: 12),
+          const DoctorCard(
+            image: "assets/images/doctor_card_1.png",
+            name: "Dr. Stella Kane",
+            speciality: "Dental",
+            medicalCenter: "Columbia Asia Hospital",
+            rating: 5,
+          ),
+          const SizedBox(height: 12),
+          const DoctorCard(
+              image: "assets/images/doctor_card_2.png",
+              name: "Dr. Stella Kane",
+              speciality: "Dental",
+              medicalCenter: "Columbia Asia Hospital",
+              rating: 2),
         ],
       ),
     );
