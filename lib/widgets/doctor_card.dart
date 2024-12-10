@@ -16,7 +16,7 @@ class DoctorCard extends StatelessWidget {
   final String medicalCenter;
   final int rating;
 
-  ///https://www.youtube.com/watch?v=Si5XJ_IocEs
+  /// https://www.youtube.com/watch?v=Si5XJ_IocEs -> Intrinsec widget
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -64,7 +64,7 @@ class DoctorCard extends StatelessWidget {
                     rating,
                     (index) => const Icon(
                       Icons.star,
-                      color: Colors.yellow,
+                      color: Colors.amber,
                       size: 16,
                     ),
                   ),
