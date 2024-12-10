@@ -1,4 +1,7 @@
+import 'package:doctor_app_template/notifier/theme_notifier.dart';
+import 'package:doctor_app_template/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ReservationScreen extends StatefulWidget {
   const ReservationScreen({super.key});
@@ -13,17 +16,22 @@ class _ReservationScreenState extends State<ReservationScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   int? _idDoctor;
-  String? _doctor;
-  String? _specialty;
 
-  String? _patientName;
-  String? _patientDNI;
+  /// Se crean controladores para los inputs
+  late TextEditingController _patientNameController;
+  late TextEditingController _patientDNIController;
 
-  bool _isLoading = false;
+  late TextEditingController _doctorNameController;
+  late TextEditingController _specialtyController;
 
   @override
   void initState() {
     super.initState();
+    _patientNameController = TextEditingController();
+    _patientDNIController = TextEditingController();
+    _doctorNameController = TextEditingController();
+    _specialtyController = TextEditingController();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _getArguments();
     });
@@ -34,8 +42,8 @@ class _ReservationScreenState extends State<ReservationScreen> {
     final Map<String, dynamic> arguments =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     _idDoctor = arguments["id"] ?? 0;
-    _doctor = arguments["doctor"] ?? "";
-    _specialty = arguments["specialty"] ?? "";
+    _doctorNameController.text = arguments["doctor"] ?? "";
+    _specialtyController.text = arguments["specialty"] ?? "";
   }
 
   @override
@@ -52,7 +60,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
               child: Column(
                 children: [
                   TextFormField(
-                    initialValue: _doctor,
+                    controller: _doctorNameController,
                     decoration: const InputDecoration(
                       labelText: "Doctor",
                     ),
@@ -60,7 +68,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                   ),
                   const SizedBox(height: 16),
                   TextFormField(
-                    initialValue: _specialty,
+                    controller: _specialtyController,
                     decoration: const InputDecoration(
                       labelText: "Especialidad",
                     ),
@@ -68,6 +76,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                   ),
                   const SizedBox(height: 16),
                   TextFormField(
+                    controller: _patientNameController,
                     decoration: const InputDecoration(
                       labelText: "Nombre del paciente",
                     ),
@@ -77,12 +86,10 @@ class _ReservationScreenState extends State<ReservationScreen> {
                       }
                       return null;
                     },
-                    onSaved: (value) {
-                      _patientName = value;
-                    },
                   ),
                   const SizedBox(height: 16),
                   TextFormField(
+                    controller: _patientDNIController,
                     decoration: const InputDecoration(
                       labelText: "DNI del paciente",
                     ),
@@ -91,9 +98,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
                         return "El DNI del paciente es requerido";
                       }
                       return null;
-                    },
-                    onSaved: (value) {
-                      _patientDNI = value;
                     },
                   ),
                 ],
@@ -105,22 +109,41 @@ class _ReservationScreenState extends State<ReservationScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: FilledButton(
             onPressed: () async {
+              if (context.read<ThemeNotifier>().isLoading) return;
+
+              if (_idDoctor == null) return;
+
               if (!_formKey.currentState!.validate()) {
                 return;
               }
-              _formKey.currentState!.save();
-              print("Reservar");
-              print("Doctor: $_doctor");
-              print("Especialidad: $_specialty");
-              print("Nombre del paciente: $_patientName");
-              print("DNI del paciente: $_patientDNI");
-              _isLoading = true;
-              setState(() {});
-              await Future.delayed(const Duration(seconds: 2));
+              await context.read<ThemeNotifier>().createDate(
+                    idDoctor: _idDoctor!,
+                    patientName: _patientNameController.text,
+                    patientDNI: _patientDNIController.text,
+                  );
               if (!context.mounted) return;
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Reserva realizada con éxito"),
+                ),
+              );
               Navigator.pop(context);
             },
-            child: const Text("Reservar"),
+            child: Selector<ThemeNotifier, bool>(
+              selector: (_, notifier) => notifier.isLoading,
+              builder: (_, isLoading, __) {
+                if (isLoading) {
+                  return const SizedBox(
+                    height: 10,
+                    width: 10,
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
+                  );
+                }
+                return const Text("Reservar");
+              },
+            ),
           ),
         ),
       ),

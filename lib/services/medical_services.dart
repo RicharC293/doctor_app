@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:doctor_app_template/models/doctor_model.dart';
 import 'package:doctor_app_template/models/medical_service_model.dart';
 
 class MedicalServices {
@@ -69,4 +70,53 @@ class MedicalServices {
 
   /// Crear un metodo que retorne una lista de doctores
   /// https://my-json-server.typicode.com/RicharC293/fake_doctors/doctors
+
+  Future<List<DoctorModel>> getDoctors() async {
+    try {
+      final response = await dio.get(
+          "https://my-json-server.typicode.com/RicharC293/fake_doctors/doctors");
+
+      /// parseo de la respuesta
+      // final data = response.data;
+      /// No se rompe por los valores nulos
+      if (response.data == null) {
+        return [];
+      }
+
+      /// Crear una lista de doctores
+      final List<DoctorModel> doctors = (response.data as List)
+          .map(
+            (doctor) => DoctorModel.fromJson(doctor),
+          )
+          .toList();
+
+      return doctors;
+
+      /// Revisar
+    } catch (e) {
+      print(e);
+      return [];
+    }
+  }
+
+  Future<void> createDate({
+    required int idDoctor,
+    required String patientName,
+    required String patientDNI,
+  }) async {
+    try {
+      final response = await dio.post(
+        "https://my-json-server.typicode.com/RicharC293/fake_doctors/reservations",
+        data: {
+          "idDoctor": idDoctor,
+          "patientName": patientName,
+          "patientDNI": patientDNI,
+        },
+      );
+
+      print(response.data);
+    } catch (e) {
+      print(e);
+    }
+  }
 }
