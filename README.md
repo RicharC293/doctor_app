@@ -34,3 +34,24 @@ https://stackoverflow.com/questions/42736038/android-emulator-not-able-to-access
 https://docs.flutter.dev/ui/assets/assets-and-images
 
 # doctor_app
+
+Una aplicación creada en Flutter
+
+Que tiene esta app?
+
+* Construcción layouts
+* Uso de gestor de estados provider
+* Navegación
+* Argumentos de navegación 
+* Consumo de un api REST mediante un placeholder https://jsonplaceholder.typicode.com/
+
+
+# Instrucciones
+
+1. Dar una estrellita a este repositorio ⭐️.
+2. Clonar el repositorio.
+3. Abrir el repositorio en VS Code o Android Studio.
+4. Ejecutar un ```flutter pub get``` para actualizar los paquetes.
+5. Abrir un simulador o emulador.
+6. Ejecutar ```flutter run```
+7. Disfrutar 😃
