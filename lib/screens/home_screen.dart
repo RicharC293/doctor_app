@@ -1,3 +1,4 @@
+import 'package:doctor_app_template/screens/reservation_screen.dart';
 import 'package:doctor_app_template/widgets/doctor_card.dart';
 import 'package:doctor_app_template/widgets/medical_card.dart';
 import 'package:flutter/material.dart';
@@ -122,7 +123,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: const Color(0xff68EEBE),
                 srcIcon: "assets/svg/medicines.svg",
                 title: "Medicines",
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, ReservationScreen.routeName);
+                },
               ),
             ],
           ),
@@ -173,11 +176,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           const SizedBox(height: 12),
           const DoctorCard(
-              image: "assets/images/doctor_card_2.png",
-              name: "Dr. Stella Kane",
-              speciality: "Dental",
-              medicalCenter: "Columbia Asia Hospital",
-              rating: 2),
+            image: "assets/images/doctor_card_2.png",
+            name: "Dr. Stella Kane",
+            speciality: "Dental",
+            medicalCenter: "Columbia Asia Hospital",
+            rating: 2,
+          ),
         ],
       ),
     );
