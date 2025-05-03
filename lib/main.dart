@@ -1,10 +1,20 @@
 import 'package:doctor_app_template/notifier/theme_notifier.dart';
+import 'package:doctor_app_template/screens/flow_selector.dart';
 import 'package:doctor_app_template/screens/introduction_screen.dart';
 import 'package:doctor_app_template/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:morphr/morphr.dart';
 
-void main() => runApp(const MyApp());
+import 'morphr_options.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Initialize Morphr with your configuration
+  await MorphrService.instance.initializeCloud(options: morphrOptions);
+
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -25,7 +35,7 @@ class MyApp extends StatelessWidget {
         // home: IntroductionScreen(),
 
         routes: routes,
-        initialRoute: IntroductionScreen.routeName,
+        initialRoute: FlowSelector.routeName,
 
         /// ThemeData
         theme: context.watch<ThemeNotifier>().isDark
