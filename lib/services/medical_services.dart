@@ -117,6 +117,7 @@ class MedicalServices {
       print(response.data);
     } catch (e) {
       print(e);
+      rethrow;
     }
   }
 }

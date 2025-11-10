@@ -1,9 +1,5 @@
-import 'package:doctor_app_template/main.dart';
-import 'package:doctor_app_template/models/doctor_model.dart';
-import 'package:doctor_app_template/models/medical_service_model.dart';
 import 'package:doctor_app_template/notifier/theme_notifier.dart';
 import 'package:doctor_app_template/screens/reservation_screen.dart';
-import 'package:doctor_app_template/services/medical_services.dart';
 import 'package:doctor_app_template/utils/colors.dart';
 import 'package:doctor_app_template/widgets/doctor_card.dart';
 import 'package:doctor_app_template/widgets/medical_card.dart';

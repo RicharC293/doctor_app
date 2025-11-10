@@ -1,5 +1,4 @@
 import 'package:doctor_app_template/notifier/theme_notifier.dart';
-import 'package:doctor_app_template/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -109,25 +108,34 @@ class _ReservationScreenState extends State<ReservationScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: FilledButton(
             onPressed: () async {
-              if (context.read<ThemeNotifier>().isLoading) return;
+              try {
+                if (context.read<ThemeNotifier>().isLoading) return;
 
-              if (_idDoctor == null) return;
+                if (_idDoctor == null) return;
 
-              if (!_formKey.currentState!.validate()) {
-                return;
+                if (!_formKey.currentState!.validate()) {
+                  return;
+                }
+                await context.read<ThemeNotifier>().createDate(
+                      idDoctor: _idDoctor!,
+                      patientName: _patientNameController.text,
+                      patientDNI: _patientDNIController.text,
+                    );
+                if (!context.mounted) return;
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Reserva realizada con éxito"),
+                  ),
+                );
+                Navigator.pop(context);
+              } catch (err) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Ha ocurrido un error inesperado"),
+                    backgroundColor: Colors.redAccent,
+                  ),
+                );
               }
-              await context.read<ThemeNotifier>().createDate(
-                    idDoctor: _idDoctor!,
-                    patientName: _patientNameController.text,
-                    patientDNI: _patientDNIController.text,
-                  );
-              if (!context.mounted) return;
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text("Reserva realizada con éxito"),
-                ),
-              );
-              Navigator.pop(context);
             },
             child: Selector<ThemeNotifier, bool>(
               selector: (_, notifier) => notifier.isLoading,
